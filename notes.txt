@@ -29,5 +29,17 @@ implement our own multiclass-svm-strategies
 .. then split these subsets etc.
 .. in the end have svms that are specialised on the most difficult problems, for example distinguishes between 8 and 9 which look similar
 .. -> in CIFAR10, distinguishing between dogs and cats might be hard
-. or build one regression svm for each class
+. or build one regression svm for each class (vs. the 9 others)
 .. that will give us a confidence between 0 and 1 for every class
+
+image feature extraction
+. e.g. interactions between pixels and their neighbors in order to detect edges (might improve svm results but probably not neural networks)
+
+transpose images
+-> evaluate if the accuracy is different
+
+data augmentation (transpose, zoom, change contrast, change color,...)
+
+downsampling: average or median of 4 pixels
+
+grayscale the coloured images
