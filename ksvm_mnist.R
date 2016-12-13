@@ -120,7 +120,8 @@ ksvm.crossVal <- function(x, y = NULL, type = NULL,kernel = "rbfdot",
     return(list(mod.cv = mod.cv, c.mat.cv = c.mat.cv, accuracy = accuracy))
   }
   
-  return(res)
+  accuracy <- sapply(res, function(x) x$accuracy)
+  return(list(result = res, accuracy = accuracy, accuracy.mean = mean(accuracy)))
 }
 
 system.time(test <- ksvm.crossVal(X, Y, type = "spoc-svc", scaled = FALSE, nfolds = 5))
