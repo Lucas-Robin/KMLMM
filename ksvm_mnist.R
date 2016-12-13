@@ -8,6 +8,7 @@ library(foreach)
 library(doRNG)
 library(doSNOW)
 library(kernlab)
+library(caret)
 registerDoSNOW(cl <- makeCluster(8, type = "SOCK"))
 set.seed(42)
 
@@ -86,15 +87,43 @@ ksvm.crossVal <- function(x, y = NULL, type = NULL,kernel = "rbfdot",
                           prob.model = FALSE, class.weights = NULL, nfolds = 5, fit = TRUE, 
                           cache = 40, tol = 0.001, shrinking = TRUE, scaled = TRUE)
 {
-  foreach(i = 1:nfolds) %dorng%
+  
+  folds <- createFolds(y, k = nfolds)
+  
+  res <- foreach(i = 1:nfolds) %dorng%
   {
-    kernlab::ksvm(x, y = y, type = type, kernel = kernel, kpar = kpar, C = C, nu = nu, 
-                  epsilon = epsilon, prob.model = prob.model, class.weights = class.weights, 
-                  fit = fit, cache = cache, tol = tol, shrinking = shrinking, scaled = scaled)
+    library(kernlab)
+    library(caret)
+    # training dataset
+    x_train = x[-folds[[i]],]
+    y_train = y[-folds[[i]]]
+    # testing dataset
+    x_test = x[folds[[i]],]
+    y_test = y[folds[[i]]]
+    
+    if(!is.factor(y_train))
+    {
+      y_train <- as.factor(y_train)
+      y_test <- as.factor(y_test)
+      
+    }
+    
+    mod.cv <- ksvm(x_train, y = y_train, type = type, kernel = kernel, kpar = kpar, C = C, nu = nu, 
+                   epsilon = epsilon, prob.model = prob.model,  class.weights = class.weights, 
+                   fit = fit, cache = cache, tol = tol, shrinking = shrinking, scaled = scaled)
+    
+    prediction <- predict(mod.cv, newdata = x_test)
+    c.mat.cv <- table(prediction, y_test)
+    
+    accuracy <- confusionMatrix(c.mat.cv)$overall[["Accuracy"]]
+    
+    return(list(mod.cv = mod.cv, c.mat.cv = c.mat.cv, accuracy = accuracy))
   }
+  
+  return(res)
 }
 
-system.time(test <- ksvm.crossVal(X, as.factor(Y), type = "spoc-svc", scaled = FALSE, nfolds = 5))
+system.time(test <- ksvm.crossVal(X, Y, type = "spoc-svc", scaled = FALSE, nfolds = 5))
 system.time(test2 <- ksvm(X, as.factor(Y), type = "spoc-svc", scaled = FALSE, cross = 5))
 
 
