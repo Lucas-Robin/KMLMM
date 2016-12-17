@@ -1,0 +1,36 @@
+1) introduction to the task
+    a) what is image classification
+    b) description of the 3 datasets
+
+2) results to compare with
+    a) state of the art from the literature
+    b) our neural network results
+
+3) multiclass kernel SVM
+    a) description of the multiclass strategies
+        - the two which are already implented in R
+        - our one-against-all approach
+        - our tree-based approach
+        - do we have more here ?!
+    b) parameters
+        - explanation how we found parameters (cross-validation etc.)
+        - maybe include the most important parameters in the report also
+    c) results of the different strategies on all the datasets
+        - accuracy rates
+        - confusion tables (maybe only for the best results, otherwise we have a lot of confusion tables)
+
+4) conclusions
+    a) compare NNs vs. SVMs
+    b) maybe we'll have some more conclusions (classes which get confused often, etc)
+
+5) description of the interactive application
+    a) what it does
+    b) manual how to use it
+
+
+Once we finished this, we can decide what else to include:
+- downsampling images
+- adding noise
+- rotations
+- other multiclass-strategies
+- other machine learning techniques (e.g. principal component regression)
