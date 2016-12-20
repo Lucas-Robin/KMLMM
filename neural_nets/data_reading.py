@@ -1,8 +1,9 @@
 import numpy as np
 import pickle
+from keras.datasets import mnist
 
-mnist_train_path = "../zip_train.dat"
-mnist_test_path = "../zip_test.dat"
+zip_train_path = "../zip_train.dat"
+zip_test_path = "../zip_test.dat"
 cifar10_path = "../cifar-10-batches-py/"
 
 def get_lines(path):
@@ -29,8 +30,8 @@ def read_y_x(path, sep=" "):
     return (y, x)
 
 def get_zip():
-    (y_train, X_train) = read_y_x(mnist_train_path)
-    (y_test, X_test) = read_y_x(mnist_test_path)
+    (y_train, X_train) = read_y_x(zip_train_path)
+    (y_test, X_test) = read_y_x(zip_test_path)
     return (X_train, y_train, X_test, y_test)
 
 def get_cifar10_batch(batch):
@@ -54,4 +55,10 @@ def get_cifar10():
         (X, y) = get_cifar10_batch(i + 1)
         X_train[(i * 10000):((i+1) * 10000), :, :, :] = X
         y_train[(i * 10000):((i+1) * 10000)] = y
+    return (X_train, y_train, X_test, y_test)
+
+def get_mnist():
+    (X_train, y_train), (X_test, y_test) = mnist.load_data()
+    X_train = X_train.reshape(60000, 1, 28, 28)
+    X_test = X_test.reshape(10000, 1, 28, 28)
     return (X_train, y_train, X_test, y_test)

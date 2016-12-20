@@ -44,5 +44,5 @@ plot_image <- function(pixels) {
   b <- matrix(pixels[2049:3072], ncol=32, byrow = TRUE)
   pixels <- rgb(r, g, b, maxColorValue = 255)
   dim(pixels) <- c(32, 32)
-  grid.raster(pixels, interpolate=FALSE)
+  grid.raster(pixels, interpolate=T)
 }
