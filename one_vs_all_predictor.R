@@ -1,17 +1,15 @@
 library(kernlab)
 
 source("zip.R")
+source("mnist.R")
 
-#source("ksvm_mnist.R") # TODO replace this
-
-data = read_zip()
+#data = read_zip()
+data = read_mnist()
 
 X_train = data$X_train
 X_test = data$X_test
 y_train = data$y_train
 y_test = data$y_test
-
-#tmp = ksvm.crossVal(X_train, y_train, nfolds = 10, type="kbb-svc")
 
 models = list()
 for (i in 0:9) {

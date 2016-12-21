@@ -2,7 +2,7 @@ source("zip.R")
 source("mnist.R")
 source("cifar10.R")
 
-dataset = 2
+dataset = 1
 
 if (dataset == 0) {
   data = read_zip()
