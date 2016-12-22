@@ -1,8 +1,8 @@
 import pygame
-from mnist import zip_trained_model
 import numpy as np
+from keras.models import load_model
 
-size = 16
+size = 28
 scale = 10
 line_width = 2
 
@@ -43,10 +43,10 @@ def handle_click(x, y):
     pixels[x][y] = 1
     update()
 
-model = zip_trained_model()
+model = load_model("model1.h5")
 
 def predict():
-    pred = model.predict(np.array(pixels).T.reshape((1, 1, 16, 16)))
+    pred = model.predict(np.array(pixels).T.reshape((1, 1, size, size)))
     print(pred)
     print(np.argmax(pred))
 
