@@ -179,7 +179,7 @@ See the plots of the training process in Figure \ref{mnist_plots}.\\
 We observe that lenet5 behaves best on the MNIST dataset,
 followed by lenet1.\\
 The dense networks are a little bit worse.
-The best dense network is dense1000, whereas the others perform nearly equally well.
+The best dense network is dense1000, whereas the others perform nearly equally well.\\
 
 \begin{tabular}{|l|c|c|}
  \hline
@@ -205,7 +205,7 @@ See the plots of the training process in Figure \ref{cifar10_plots}.\\
 We observe that lenet5 beats the other networks by a huge margin,
 but starts to overfit after 30 iterations.\\
 Lenet1 has a constant learning curve, whereas the dense networks
-get stuck and do no longer improve after several iterations.
+get stuck and do no longer improve after several iterations.\\
 
 \begin{tabular}{|l|c|c|}
  \hline
@@ -224,8 +224,37 @@ get stuck and do no longer improve after several iterations.
  \label{cifar10_plots}
 \end{figure}
 
-\textbf{More filters}
+\textbf{More filters}\\
 
-TODO
+Since the validation accuracies on the CIFAR-10 dataset are not very good, we try to improve the lenet5
+network by adding more filters to each convolution layer.\\
 
-\subsection{State of the art}
+After 30 iterations we get the following results:\\
+
+\begin{tabular}{|c|c|c|}
+ \hline
+ network(filters) & training accuracy & validation accuracy\\ \hline
+ lenet5(6,16,120) & 71.02 \% & 60.29 \% \\
+ lenet5(16,32,120) & 84.31 \% & 65.85 \% \\
+ lenet5(32,64,256) & 97.42 \% & \textbf{67.15} \% \\
+ \hline
+\end{tabular}\\
+
+We observe that adding more filters increases the validation accuracy
+by some points, but has a higher effect on the training accuracy.
+
+
+\subsection{Final results and state of the art}
+
+Finally, we trained the models selected above on the whole training
+set of each dataset and compare the test accuracy with
+the state of the art results listed on \cite{state-of-art}.\\
+
+\begin{tabular}{|c|c|c|}
+ \hline
+ network(filters):iterations @ dataset & test accuracy & state of the art\\ \hline
+ lenet5(6,16,120):40 @ ZIP & 94.71 \% & - \\
+ lenet5(6,16,120):70 @ MNIST & ?? \% & 99.79 \% \\
+ lenet5(32,64,256):30 @ CIFAR-10 & ?? \% & 96.53 \% \\
+ \hline
+\end{tabular}
