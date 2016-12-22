@@ -36,5 +36,7 @@ read_mnist <- function() {
 }
 
 show_digit <- function(arr784, col=gray(12:1/12), ...) {
-  image(matrix(arr784, nrow=28)[,28:1], col=col, ...)
+  n = length(arr784)
+  d = sqrt(n)
+  image(matrix(as.matrix(arr784), nrow=d)[,d:1], col=col, ...)
 }
