@@ -21,7 +21,7 @@ X_valid_centered = scale(X_valid, center=colMeans(X_train), scale=F)
 X_train_centered = scale(X_train, scale=F)
 
 # for each pair of digits: build a ksvm and evaluate it on the validation set
-accuracies = matrix(0, nrow = 10, ncol = 10)
+accuracies = matrix(NA, nrow = 10, ncol = 10)
 
 for (i in 0:8) {
   for (j in (i+1):9) {
@@ -38,4 +38,8 @@ for (i in 0:8) {
 
 # For each digit, find the one against which we get the best accuracy
 couples <- sapply(1:10, function(i, acc) {return(which.max(acc[i, ]) -1)}, accuracies)
+couples[order(couples)]
+
+# For each digit, find the one against which we get the worst accuracy
+couples <- sapply(1:10, function(i, acc) {return(which.min(acc[i, ]) -1)}, accuracies)
 couples[order(couples)]
