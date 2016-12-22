@@ -35,3 +35,7 @@ for (i in 0:8) {
     print(paste("accuracy", i, "vs.", j, "=", accuracy))
   }
 }
+
+# For each digit, find the one against which we get the best accuracy
+couples <- sapply(1:10, function(i, acc) {return(which.max(acc[i, ]) -1)}, accuracies)
+couples[order(couples)]
