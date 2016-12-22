@@ -1,5 +1,5 @@
 # code from https://gist.github.com/brendano/39760 slightly adapted
-read_mnist() <- function() {
+read_mnist <- function() {
   load_image_file <- function(filename) {
     ret = list()
     f = file(filename,'rb')
