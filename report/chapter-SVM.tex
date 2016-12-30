@@ -21,6 +21,10 @@ See \cite{kbb-svc} for more details.
 
 \subsubsection{one-vs-all approach}
 
+The idea is to train one model for each class, that predicts whether a sample belongs to the class or not.
+We use KSVM for regression in order to avoid conflicts, which would arise when we would only use binary classification
+(i.e. multiple models or no model could predict ``yes'' for the same sample).
+Then we can finally predict the class where the model was the most confident (i.e. the regression output is the highest).
 
 \subsubsection{tree-based approach}
 
@@ -33,6 +37,11 @@ See \cite{kbb-svc} for more details.
 \subsubsection{kbb-svc}
 
 \subsubsection{one-vs-all approach}
+
+We decided to use the RBF-kernel and the same C-parameter for all of the 10 models,
+in order to reduce the parameter searchspace.\\
+The following plot shows the mean validation accuracy on the ZIP dataset
+for different C-parameters, when doing a 10-fold crossvalidation.
 
 \includegraphics[width=0.8\textwidth]{../plots/one_vs_all_zip}
 
