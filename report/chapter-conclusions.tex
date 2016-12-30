@@ -1,6 +1,42 @@
 
 \section{Conclusions}
 
+See the following table for our final accuracy rates on each dataset.
+For the model selection that was done for each dataset, refer to the sections above.
+
+\begin{tabular}{c|c|c|c}
+ dataset & CNN & one-vs-all SVMs & state of the art \\ \hline
+ ZIP & 94.71 \% & 95.31 \% & - \\
+ MNIST & 98.96 \% & 97.97 \% & 99.79 \% \\
+ CIFAR-10 & 68.12 \% & xx.xx \% & 96.53 \% \\
+\end{tabular}
+
+
 \subsection{Difficulties of the datasets}
 
+Although the type of images are the same for the ZIP and MNIST datasets,
+they differ in the image size and training set size.
+The smaller images and the smaller training set makes the ZIP dataset harder to predict.\\
+Using data augmentation and therefore increasing the size of the training set would possibly improve the results.
+
+Although the CIFAR-10 dataset has coloured images and therefore each sample contains more information,
+the variety of images makes it a hard task.
+
+
 \subsection{Comparison of Neural Networks and SVMs}
+
+We conclude that our multiclass SVM strategies can compete with the CNNs.\\
+On ZIP and MNIST we had close to equal results when using SVMs and CNNs.\\
+On both datasets our results are not far away from the state of the art techniques.
+
+For CNNs it was hard to find a good network architecture, especially for the CIFAR-10 dataset.\\
+Fine-tuning SVMs also takes a lot of time, but a simple grid-search can already lead to good results.
+
+\subsection{Problems we encountered}
+
+We had to reduce the sizes of the MNIST and CIFAR-10 datasets when training SVMs,
+because we realized that the R-implementations need a lot of RAM
+and modelling the SVMs sometimes took several hours.\\
+
+The training time of the bigger CNNs (e.g. lenet5) did also run for several hours,
+at least for the MNIST and CIFAR-10 datasets which are quite big.

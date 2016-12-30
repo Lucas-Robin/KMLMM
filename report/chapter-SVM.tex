@@ -30,7 +30,7 @@ Then we can finally predict the class where the model was the most confident (i.
 
 
 
-\subsection{Parameter optimization}
+\subsection{Parameter optimization and results}
 
 \subsubsection{spoc-svc}
 
@@ -45,7 +45,21 @@ for different C-parameters, when doing a 10-fold crossvalidation.
 
 \includegraphics[width=0.8\textwidth]{../plots/one_vs_all_zip}
 
+On the ZIP dataset, the best crossvalidation result was achieved with $C = 1000$,
+when comparing 7 different values which were varying from 0.001 to 1000 in a logarithmic scale.\\
+
+Due to a lack of memory and time constraints, we decided to reduce the training set of the MNIST
+dataset to 30\% of its original size, which means that 18,000 training images remained.\\
+On this new training set the best crossvalidation result was achieved with $C = 100$.\\
+
+With the parameters chosen as described above, we got the following accuracies on the test sets:\\
+
+\begin{tabular}{c|c}
+ dataset[training set size] & test accuracy \\ \hline
+ ZIP[7291] & 95.31 \% \\
+ MNIST[18000] & 97.97 \% \\
+ CIFAR-10[5000] & XX.XX \% \\
+\end{tabular}
+
+
 \subsubsection{tree-based approach}
-
-
-\subsection{Results}
