@@ -2,13 +2,15 @@
 \section{Conclusions}
 
 See the following table for our final accuracy rates on each dataset.
-For the model selection that was done for each dataset, refer to the sections above.
+For the model selection that was done for each dataset, refer to the sections above.\\
 
-\begin{tabular}{c|c|c|c}
+\begin{tabular}{|c|c|c|c|}
+ \hline
  dataset & CNN & one-vs-all SVMs & state of the art \\ \hline
  ZIP & 94.71 \% & 95.31 \% & - \\
  MNIST & 98.96 \% & 97.97 \% & 99.79 \% \\
  CIFAR-10 & 68.12 \% & xx.xx \% & 96.53 \% \\
+ \hline
 \end{tabular}
 
 
@@ -39,4 +41,4 @@ because we realized that the R-implementations need a lot of RAM
 and modelling the SVMs sometimes took several hours.\\
 
 The training time of the bigger CNNs (e.g. lenet5) did also run for several hours,
-at least for the MNIST and CIFAR-10 datasets which are quite big.
+at least for the MNIST and CIFAR-10 datasets, which are quite big.

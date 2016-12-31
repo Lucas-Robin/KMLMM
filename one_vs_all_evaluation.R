@@ -2,19 +2,35 @@ library(kernlab)
 
 source("zip.R")
 source("mnist.R")
+source("cifar10.R")
 source("one_vs_all_predictor.R")
 
-c_candidates = c(0.001, 0.01, 0.1, 1, 10, 100, 1000)
-k = 5
-#c_candidates = c(1, 10, 100)
-#k = 3
+### BEGIN PARAMETERS ###
 
-data = read_zip()
+## choose C candidates:
+#c_candidates = c(0.001, 0.01, 0.1, 1, 10, 100, 1000)
+c_candidates = c(1, 10, 100)
+
+## k for k-fold CV (prefered value: k = 5):
+k = 3
+
+## select dataset:
+#data = read_zip()
 #data = read_mnist()
+data = read_cifar10()
 
-X_train = data$X_train
+## choose training set size:
+n_train = 0.1 * dim(data$X_train)[1]
+#n_train = 4000
+
+### END PARAMETERS ###
+
+
+print(paste("n_train =", n_train))
+
+X_train = data$X_train[1:n_train, ]
 X_test = data$X_test
-y_train = data$y_train
+y_train = data$y_train[1:n_train]
 y_test = data$y_test
 
 n_train = dim(X_train)[1]
