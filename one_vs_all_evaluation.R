@@ -9,10 +9,10 @@ source("one_vs_all_predictor.R")
 
 ## choose C candidates:
 #c_candidates = c(0.001, 0.01, 0.1, 1, 10, 100, 1000)
-c_candidates = c(1, 10, 100)
+c_candidates = c(0.001, 0.1, 1, 10, 100)
 
 ## k for k-fold CV (prefered value: k = 5):
-k = 3
+k = 5
 
 ## select dataset:
 #data = read_zip()
@@ -64,6 +64,7 @@ for (j in 1:length(c_candidates)) {
   mean_accuracies[j] = mean_accuracy
 }
 
+pdf("one_vs_all_evaluation.pdf")
 # plot mean accuracy over C
 plot(c_candidates, mean_accuracies,
      ylab="mean CV accuracy",
@@ -71,6 +72,7 @@ plot(c_candidates, mean_accuracies,
      type="l",
      col="red",
      log="x")
+dev.off()
 
 # select the C with highest validation accuracy
 best = which.max(mean_accuracies)
