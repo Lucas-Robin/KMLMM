@@ -9,7 +9,7 @@ source("one_vs_all_predictor.R")
 
 ## choose C candidates:
 #c_candidates = c(0.001, 0.01, 0.1, 1, 10, 100, 1000)
-c_candidates = c(0.001, 0.1, 1, 10, 100)
+c_candidates = 5:15 * 0.1
 
 ## k for k-fold CV (prefered value: k = 5):
 k = 5
@@ -64,7 +64,7 @@ for (j in 1:length(c_candidates)) {
   mean_accuracies[j] = mean_accuracy
 }
 
-pdf("one_vs_all_evaluation.pdf")
+pdf("one_vs_all_evaluation_0.5_to_1.5.pdf")
 # plot mean accuracy over C
 plot(c_candidates, mean_accuracies,
      ylab="mean CV accuracy",
